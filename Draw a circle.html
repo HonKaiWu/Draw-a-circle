@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #cas {
+            border: 1px solid #ccc;
+        }
+    </style>
+
+</head>
+<body>
+<canvas width="800" height="600" id="cas"></canvas>
+<script>
+    var cas = document.querySelector("#cas");
+    var ctx = cas.getContext("2d");
+
+    function angleToRadian(angle){
+        return angle * Math.PI / 180;
+    }
+    
+    function getRandomColor() {
+        return "rgb("+ parseInt(Math.random() * 255) + "," + parseInt(Math.random() * 255) + "," + parseInt(Math.random() * 255) + ")";
+    }
+
+    var x = cas.width /2;
+    var y = cas.height /2;
+    var r = 200;
+    var step = 6;
+    var startAngle = -170;
+
+
+    //效果1
+//    var timer = setInterval(function () {
+//        ctx.beginPath();
+//        ctx.fillStyle = getRandomColor();
+//        ctx.moveTo(x,y);
+//
+//
+//        var endAngle = startAngle + step;
+//
+//        ctx.arc(x,y,r,angleToRadian(startAngle),angleToRadian(endAngle));
+//        ctx.closePath();
+//        ctx.fill();
+//
+//        startAngle += step;
+//    },17)
+
+
+    //正常效果
+        var timer = setInterval(function () {
+            ctx.beginPath();
+            ctx.fillStyle = getRandomColor();
+            ctx.moveTo(x,y);
+            if(startAngle >= -20){
+                clearInterval(timer);
+                return;
+            }
+
+
+            var endAngle = startAngle + step;
+            if(startAngle + step > -20){
+                endAngle = -20;
+            }
+
+            ctx.arc(x,y,r,angleToRadian(startAngle),angleToRadian(endAngle));
+            ctx.closePath();
+            ctx.fill();
+
+            startAngle += step;
+        },17)
+
+
+
+
+</script>
+</body>
+</html>
